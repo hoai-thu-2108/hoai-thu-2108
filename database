@@ -1,0 +1,14 @@
+CREATE DATABASE KHACHSAN; 
+USE KHACHSAN; 
+CREATE TABLE KhachHang(MaKH varchar(10) not null,TenKH varchar(200) not null,NgaySinh date,GioiTinh varchar(5),CCCD varchar(15),SDT int,PRIMARY KEY (MaKH)); 
+ 
+CREATE TABLE DichVu(MaDV varchar(10) not null,TenDV varchar(100),GiaDV int, MaNV varchar(10), PRIMARY KEY (MaDV, MaNV), CONSTRAINT FK_DichVu FOREIGN KEY(MaNV) REFERENCES NhanVien (MaNV) ON UPDATE CASCADE ON DELETE CASCADE ); 
+ 
+ 
+CREATE TABLE NhanVien (MaNV varchar(10) not null,TenNV varchar (200),NgaySinh date,GioiTinh varchar(5),CCCD varchar(15),SDT int,PRIMARY KEY (MaNV) ); 
+CREATE TABLE Phong(MaP varchar(10) not null,TenP varchar(100),LoaiP varchar(100),SoLuongNguoiMax int,GiaP int,DichVuKem varchar(100),PRIMARY KEY (MaP)); 
+ 
+CREATE TABLE HoaDon( MaHD varchar(10) not null,MaKH varchar(10),MaDV varchar(10),SoTien int,NgayLapHD date,PhuongThucThanhToan varchar(100),PRIMARY KEY (MaHD),CONSTRAINT FK1 FOREIGN KEY (MaKH) REFERENCES KhachHang (MaKH) ON UPDATE CASCADE ON DELETE CASCADE, CONSTRAINT FK2 FOREIGN KEY (MaDV) REFERENCES DichVu (MaDV) ON UPDATE CASCADE ON DELETE CASCADE ); 
+ 
+CREATE TABLE ThuePhong(SoDK varchar(10) not null,MaKH varchar(10),MaP varchar(10), NgayDatCho date,NgayDen date,NgayDi date,PRIMARY KEY (SoDK),CONSTRAINT FK3 FOREIGN KEY (MaP) REFERENCES Phong (MaP) ON UPDATE CASCADE ON DELETE CASCADE, CONSTRAINT FK4 FOREIGN KEY (MaKH) REFERENCES KhachHang (MaKH) ON UPDATE CASCADE ON DELETE CASCADE ); 
+ 
